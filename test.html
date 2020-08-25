@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>测试</title>
+  <meta charset="utf-8">
+  <script src="/static/lib/jquery.min.js"></script>
+  <script src="//upchat.95516.net/public/scripts/app.upchat.js"></script>
+</head>
+
+<body>
+  <script type="text/javascript">
+  let $service = function() {
+    let defaults = {};
+    defaults.upLogin = function() {
+      var vm = this;
+      // 非U聊客户端打开或失败
+      return new Promise(function(resolve, reject) {
+        var toApp = function(reject) {
+          reject(false);
+        };
+        if (UPCHAT.M.isNative()) {
+          UPCHAT.M.init(function() {
+            UPCHAT.M.NAPI.showLoadingView();
+            vm.sTime = new Date().getTime();
+            // 获取效验码
+            alert(2)
+            UPCHAT.M.NAPI.getSecurity(function(result) {
+              alert(result.security);
+              // 成功回调函数
+              vm.eTime = new Date().getTime();
+              UPCHAT.M.NAPI.dismiss();
+              if (result.status == '0') {
+                // 调用校验码验证接口
+                vm.get('/uchat/checkSecurity', {
+                  'time': vm.eTime - vm.sTime,
+                  'code': result.security
+                }, function(res) {
+                  alert(4);
+                  alert(res);
+                  resolve(true);
+                }, function(res) {
+                  console.log(3);
+                  alert(res);
+                  if (res.response.status == 502) {
+                    vm.login();
+                  }
+                });
+              }
+            }, function(fal) {
+              // 失败后回调函数
+              UPCHAT.M.NAPI.dismiss();
+              toApp(reject);
+            }, { 'sysid': 'upchat-oazx-mamxcw' });
+          });
+        } else {
+          toApp(reject);
+        }
+      });
+    };
+    return defaults;
+  };
+  alert(1)
+  $service().upLogin().then(function(res) {
+    alert(res);
+  }, function(res) {
+    alert(res);
+  });
+
+  </script>
+</body>
+
+</html>

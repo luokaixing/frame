@@ -1,0 +1,52 @@
+.table {
+  padding: 0 30px;
+  overflow: auto;
+  margin-top: 30px;
+}
+
+.el-table {
+  width: 100%;
+
+  .el-input__icon {
+    line-height: 30px;
+
+  }
+
+  .el-input__inner {
+    height: 30px;
+    line-height: 30px;
+  }
+}
+
+.el-table td {
+  padding: 4px 0;
+}
+
+.el-table th {
+  padding: 9px 0;
+}
+
+.el-table thead {
+  th {
+    background-color: #f2f2f2;
+  }
+}
+
+.el-table td,
+.el-table th.is-leaf {
+  border-bottom: 1px solid #e6e6e6;
+}
+
+.el-table--border td,
+.el-table--border th,
+.el-table__body-wrapper .el-table--border.is-scrolling-left~.el-table__fixed {
+  border-right: 1px solid #e6e6e6;
+}
+
+.el-table__empty-text {
+  left: 20%;
+}
+
+.el-table__empty-block {
+  min-height: 42px;
+}

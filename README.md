@@ -1,5 +1,4 @@
-# mobile-oa-manager
-
+# 在VUE基础上自己封装的一只后台管理系统框架
 > A Vue.js project
 
 ## Build Setup
